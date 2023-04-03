@@ -3,12 +3,6 @@ import { useEffect, useState } from "react";
 import { firebaseSet } from "../services/firebaseSet";
 
 export default function Form() {
-  const [shouldRefresh, setShouldRefresh] = useState(false);
-
-  useEffect(() => {
-    console.log("refreshed");
-  }, [shouldRefresh]);
-
   return (
     <>
       <div
