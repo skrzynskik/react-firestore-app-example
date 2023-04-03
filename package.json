@@ -2,6 +2,7 @@
   "name": "firestore-database-display",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://skrzynskik.github.io/react-firestore-app-example",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -16,6 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "craco start --verbose",
     "build": "craco build",
     "test": "craco test",
@@ -40,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "gh-pages": "^5.0.0"
   }
 }
