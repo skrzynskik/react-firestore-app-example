@@ -1,0 +1,8 @@
+{
+  "short_name": "firestore-db-app-example",
+  "name": "firestore-db-app-example",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
