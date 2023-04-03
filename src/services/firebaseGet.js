@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 
-export async function firebaseGet(documentName) {
+export async function firebaseGet() {
   console.log("aaaaaaa");
   const firebaseConfig = {
     apiKey: "AIzaSyCTPJNB8d8MhTl30LcMs6eVA9Gd5octO4Q",
@@ -17,13 +17,38 @@ export async function firebaseGet(documentName) {
 
   const hotels = []
 
-  const hotelSnapshot = await getDocs(collection(db, documentName || 'ratings'));
-  hotelSnapshot.forEach(async (doc) => {
-    const aa = await doc.data().hotel.get();
-    console.log(aa);
+  const hotelSnapshot = await getDocs(collection(db, 'hotels'));
+  const ratingSnapshot = await getDocs(collection(db, 'ratings'));
+  const reportSnapshot = await getDocs(collection(db, 'reports'))
+
+  hotelSnapshot.forEach(hotel => {
+    const hotelObj = hotel.data()
+    hotelObj['rating'] = []
+    hotelObj['reports'] = []
+    hotels.push(hotelObj)
   });
 
+  ratingSnapshot.forEach(rating => {
+    const ratingObj = rating.data();
+    const hotelName = ratingObj.hotel;
+
+    hotels.forEach(hotel => {
+        if(hotel.name === hotelName){
+            hotel.rating.push(ratingObj.rating)
+        }
+    })
+  })
+
+  reportSnapshot.forEach(report => {
+    const reportObj = report.data();
+    const hotelName = reportObj.hotel;
+
+    hotels.forEach(hotel => {
+        if(hotel.name === hotelName){
+            hotel.reports.push(reportObj.message)
+        }
+    })
+  })
+  console.log(hotels);
   return hotels
 }
-
-console.log(await firebaseGet());
