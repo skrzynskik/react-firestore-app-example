@@ -17,14 +17,12 @@ export default function Form() {
         <Formik
           initialValues={{ hotelName: "", reportMessage: "" }}
           onSubmit={(values, { setSubmitting }) => {
-            setShouldRefresh(true);
             setTimeout(() => {
               firebaseSet({
                 hotel: values.hotelName,
                 message: values.reportMessage,
               });
               setSubmitting(false);
-              setShouldRefresh(false);
             }, 400);
           }}
         >
